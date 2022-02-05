@@ -5,20 +5,22 @@
 #include <stdlib.h>
 #include <string>
 
-using std::string;
 using std::ostream;
+using std::string;
 
 namespace logger {
 
-enum messageTypes { INFORMATIVE, EDGECASE, MINOR_ERROR, FATAL_ERROR };
+enum class messageTypes { DEBUG, INFORMATIVE, EDGECASE, MINOR_ERROR, FATAL_ERROR };
 class Logger {
 public:
- 
-  void logTo(int type, string message, int linenum, string file, ostream& ostrm); 
-  void log(int type, string message, int linenum, string file);
-  void setVerbosity(int v); 
+  Logger(int v) : mVerbosity{v} {};
+
+  void logTo(messageTypes type, string message, int linenum, string file,
+             ostream &ostrm);
+  void log(messageTypes type, string message, int linenum, string file);
+  void setVerbosity(int v);
 
 private:
-  int verbosity = 2;
+  int mVerbosity = 2;
 };
 } // namespace logger

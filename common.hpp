@@ -5,6 +5,9 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <variant>
+
+#define HERE __LINE__, __FILE__
 
 using uint = unsigned int;
 
