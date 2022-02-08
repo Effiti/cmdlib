@@ -10,14 +10,14 @@ using std::string;
 
 namespace logger {
 
-enum class messageTypes { DEBUG, INFORMATIVE, EDGECASE, MINOR_ERROR, FATAL_ERROR };
+enum class messageType { DEBUG, INFORMATIVE, EDGECASE, MINOR_ERROR, FATAL_ERROR };
 class Logger {
 public:
   Logger(int v) : mVerbosity{v} {};
 
-  void logTo(messageTypes type, string message, int linenum, string file,
+  void logTo(messageType type, string message, int linenum, string file,
              ostream &ostrm);
-  void log(messageTypes type, string message, int linenum, string file);
+  void log(messageType type, string message, int linenum, string file);
   void setVerbosity(int v);
 
 private:

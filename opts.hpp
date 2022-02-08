@@ -2,11 +2,11 @@
 
 #include "common.hpp"
 
-enum class optTypes { TOGGLE, ARGUMENT };
+enum class optType { TOGGLE, ARGUMENT };
 
 class Option {
 public:
-  Option(optTypes t, std::string longFlag,
+  Option(optType t, std::string longFlag,
          std::variant<std::string, std::monostate> shortFlag)
       : mOptType{t}, mLongFlag{longFlag}, mShortFlag{shortFlag} {};
   std::variant<std::string, std::monostate> getShortFlag() {
@@ -15,7 +15,7 @@ public:
   std::string getLongFlag() { return mLongFlag; };
 
 private:
-  optTypes mOptType;
+  optType mOptType;
   std::string mLongFlag;
   std::variant<std::string, std::monostate> mShortFlag;
 };
