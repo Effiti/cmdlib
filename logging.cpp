@@ -2,15 +2,16 @@
 #include "common.hpp"
 #include <iostream>
 #include <string>
+#include <sstream>
 
 using std::cerr;
 using std::endl;
 using std::string;
 using namespace logger;
-using enum logger::messageTypes;
+using enum logger::messageType;
 
-void Logger::logTo(messageTypes type, string message, int linenum, string file,
-                   ostream &ostrm) {
+void Logger::logTo(messageType type, string message, ostream &ostrm,
+                   int linenum, string file) {
   switch (type) {
   case DEBUG:
     if (mVerbosity > 3) {
@@ -48,7 +49,13 @@ void Logger::logTo(messageTypes type, string message, int linenum, string file,
     break;
   }
 }
-void Logger::log(messageTypes type, string message, int linenum, string file) {
-  this->logTo(type, message, linenum, file, cerr);
+void Logger::log(messageType type, string message, int linenum, string file) {
+  this->logTo(type, message, cerr, linenum, file);
 }
 void Logger::setVerbosity(int v) { this->mVerbosity = v; }
+std::string Logger::mTellPos(int linenum, std::string file){
+  std::ostringstream strm;
+  strm << (linenum!=-1 ? "on line: " : "") << (linenum!=-1 ? std::to_string(linenum) : "") << (file!="" ? " in file: " : "") << (file != "" ? file : "");
+  return strm.str();
+
+}
